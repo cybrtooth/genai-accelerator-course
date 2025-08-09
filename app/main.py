@@ -58,6 +58,44 @@ async def webhook(
     webhooks.append(email_obj)
     return PlainTextResponse("Webhook received", status_code=200)
 
+# from fastapi import Header
+
+# @app.api_route("/events", methods=["GET", "POST"])
+# async def webhook(
+#     request: Request,
+#     x_nylas_signature: str | None = Header(None, alias="X-Nylas-Signature"),
+# ):
+#     if request.method == "GET":
+#         challenge = request.query_params.get("challenge")
+#         return PlainTextResponse(challenge) if challenge else PlainTextResponse("No challenge", status_code=400)
+
+#     body = await request.body()
+
+#     # DEBUG: show what we’re comparing
+#     computed = hmac.new(
+#         os.environ["WEBHOOK_SECRET"].encode("utf8"),
+#         msg=body,
+#         digestmod=hashlib.sha256,
+#     ).hexdigest()
+#     print("Computed:", computed)
+#     print("Header  :", x_nylas_signature)
+
+#     if not x_nylas_signature or not hmac.compare_digest(computed.lower(), x_nylas_signature.strip().lower()):
+#         return PlainTextResponse("Signature verification failed!", status_code=401)
+
+#     # If you want, now parse:
+#     # from pydantic import ValidationError
+#     # try:
+#     #     event = WebhookEvent.model_validate_json(body)
+#     # except ValidationError as e:
+#     #     print("Validation error:", e)
+#     #     return PlainTextResponse("OK", status_code=200)  # still ack so Nylas stops retrying
+
+#     # Store raw first:
+#     store_event_json(WebhookEvent.model_validate_json(body))  # or store the raw bytes/string
+#     return PlainTextResponse("Webhook received", status_code=200)
+
+
 
 # Main page
 @app.get("/")
