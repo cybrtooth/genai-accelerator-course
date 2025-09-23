@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any, Optional, Type, Union
 
-import boto3
+#import boto3
 from dotenv import load_dotenv
 from httpx import AsyncClient
 from openai import AsyncAzureOpenAI
